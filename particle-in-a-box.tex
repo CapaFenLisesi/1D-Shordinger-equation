@@ -1,0 +1,65 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=0.8in,footskip=0.25in]{geometry}
+\usepackage{tcolorbox} %\begin{tcolorbox} \end{tcolorbox}
+\usepackage{float} % Use H for pics here
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+%%%%%%%table of contents set up
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+%%%%%%% end of toc setup
+\title{Particle in an infinite box}
+
+\author{Lu Ming}
+
+\date{\today}
+% no indent on new paragraph
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Conventional solution}
+We set $\hbar=2m=L=1$, therefore the Shordinger equation writes:
+\begin{equation}
+-\frac{d^2}{x^2}\psi(x)=E\psi(x)
+\end{equation}
+
+The numerical solution procedure is:
+\begin{enumerate}
+\item
+Guess a value of energy $E$
+\item
+set $\psi(0)=0$ and $\psi'(0)=1$. Setting $\psi'(0)$ to other nonzero value are OK, because it just change the normalization constant.
+\item
+advance a step using $\psi(x+\Delta x)=\psi'(x)\Delta x +\psi(x)$, and $\psi'(x+\Delta x)=\psi'(x)-E\psi(x)\Delta x$
+\item
+advance until $x=1$ and check if $\psi(L)=0$, if not, guess another value of $E$.
+\item
+if yes, normalize the wavefunction and print $E$.
+\end{enumerate}
+Some details:
+\begin{enumerate}
+\item 
+store $\psi(x)$ and $\psi'(x)$ in a array, with length $N+1$, make sure $\psi[0]=0$. The i-th step will rewrite $\psi[i+1]$ and $\psi'[i+1]$
+\item
+note the normalization conditon is $c^2\Delta x\sum_i\psi[i]^2=1$.
+\end{enumerate}
+
+Reference:
+\begin{enumerate}
+\item
+\href{http://www.wired.com/2016/03/can-solve-quantum-mechanics-classic-particle-box-problem-code/}{You Can Solve Quantum Mechanics’ Classic Particle in a Box Problem With Code}
+\item
+\href{http://physics.stackexchange.com/questions/275319/numerically-solving-a-particle-in-a-box-problem/275320#275320}{Numerically solving a particle in a box problem}
+\end{enumerate}
+
+\end{document}
